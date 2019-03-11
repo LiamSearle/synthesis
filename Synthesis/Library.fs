@@ -115,25 +115,25 @@ Remember that:
 *)
 
 let monthDay day year =
-    let rec FindMonth days count leap = 
-        let a,b = month count
-        match days > b with
-           | false -> a
+    let rec findMonth days count leap = 
+        let x,y = month count
+        match days > y with
+           | false -> x
            | true -> match leap = 1 && count = 1 with 
-                     | true -> FindMonth (days-b-leap) (count+1) leap
-                     | false -> FindMonth (days-b) (count+1) leap
+                     | true -> findMonth (days-y-leap) (count+1) leap
+                     | false -> findMonth (days-y) (count+1) leap
 
     match isLeap y with
     | true -> 
         match d >= 1 && d <= 366 with
         | false -> failwith "Invalid day"
-        | true -> FindMonth d 1 1
+        | true -> findMonth d 1 1
     | false -> 
         match d >= 1 && d <= 365 with
         | false -> failwith "Invalid day"
-        | true -> FindMonth d 1 0
+        | true -> findMonth d 1 0
             
-  failwith "Not implemented"
+ // failwith "Not implemented"
 
 (*
 15.Create a function ​coord​ which is given a Cartesian coordinate and returns functionsto calculate:
