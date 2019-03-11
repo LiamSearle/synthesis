@@ -114,69 +114,26 @@ Remember that:
  c.February has 29 days in a leap year, and 28 days otherwise.)
 *)
 
-let monthDay day year =(*
-  match isLeap(year) with
-    |true -> match day<367 with 
-      |false -> failwith "day out of range"
-      |_-> 
-        match day<32 with
-          | true -> "January"
-        match day<61 && day > 32 with
-          | true -> "February"
-        match day<92 && day> 60 with
-          |true -> "March"
-        match day<122 && day> 92 with
-          |true -> "April"
-        match day<153 && day> 122 with
-          |true -> "May"
-        match day<183 && day> 153 with
-          |true -> "June"
-        match day<214 && day> 183 with
-          |true -> "July"
-        match day<245 && day> 214 with
-          |true -> "August"
-        match day<275 && day> 245 with
-          |true -> "September"
-        match day<306 && day> 275 with
-          |true -> "October"
-        match day<336 && day> 306 with
-          |true -> "November"
-        match day<367 && day> 336 with
-          |true -> "December"
-        
-        //todo 
-    |_-> match day<366 with
-      |false -> failwith "day out of range"
-      |_->let month = function
-            | <=31 -> "January"//todo
-            |_-> 
-        match day<32 with
-          | true -> "January"
-        match day<61 && day > 32 with
-          | true -> "February"
-        match day<92 && day> 60 with
-          |true -> "March"
-        match day<122 && day> 92 with
-          |true -> "April"
-        match day<153 && day> 122 with
-          |true -> "May"
-        match day<183 && day> 153 with
-          |true -> "June"
-        match day<214 && day> 183 with
-          |true -> "July"
-        match day<245 && day> 214 with
-          |true -> "August"
-        match day<275 && day> 245 with
-          |true -> "September"
-        match day<306 && day> 275 with
-          |true -> "October"
-        match day<336 && day> 306 with
-          |true -> "November"
-        match day<367 && day> 336 with
-          |true -> "December"
-          *)
+let monthDay day year =
+    let rec findMonth days count leap = 
+        let x,y = month count
+        match days > y with
+           | false -> x
+           | true -> match leap = 1 && count = 1 with 
+                     | true -> findMonth (days-y-leap) (count+1) leap
+                     | false -> findMonth (days-y) (count+1) leap
+
+    match isLeap y with
+    | true -> 
+        match d >= 1 && d <= 366 with
+        | false -> failwith "Invalid day"
+        | true -> findMonth d 1 1
+    | false -> 
+        match d >= 1 && d <= 365 with
+        | false -> failwith "Invalid day"
+        | true -> findMonth d 1 0
             
-  failwith "Not implemented"
+ // failwith "Not implemented"
 
 (*
 15.Create a function ​coord​ which is given a Cartesian coordinate and returns functionsto calculate:
