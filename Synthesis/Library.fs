@@ -123,15 +123,15 @@ let monthDay day year =
                      | true -> findMonth (days-y-leap) (count+1) leap
                      | false -> findMonth (days-y) (count+1) leap
 
-    match isLeap y with
+    match isLeap year with
     | true -> 
-        match d >= 1 && d <= 366 with
+        match day >= 1 && day <= 366 with
         | false -> failwith "Invalid day"
-        | true -> findMonth d 1 1
+        | true -> findMonth day 1 1
     | false -> 
-        match d >= 1 && d <= 365 with
+        match day >= 1 && day <= 365 with
         | false -> failwith "Invalid day"
-        | true -> findMonth d 1 0
+        | true -> findMonth day 1 0
             
  // failwith "Not implemented"
 
@@ -144,7 +144,7 @@ Hint​: ​you developed a square-root function in a tutorial on page 35 of you
 b.whether a rectangle (described by top-left coordinate, width, and height, inthat order) will contain the initial coordinate
 *)
 
-let coord c1 c2 =
+let coord _ =
   (*let rec calculate guess i =
     match i with
     | 10 -> guess
@@ -157,6 +157,7 @@ let coord c1 c2 =
     | _ ->
     calculate (n/2.0) 0
     *)
+    (*
   let x1,_ = c1
   let x2,_ = c2
   let _,y1 = c1
@@ -171,5 +172,5 @@ let coord c1 c2 =
       |true -> true
       |_ -> false
 
-  (dist, included)
-    //failwith "Not implemented"
+  (dist, included)*)
+    failwith "Not implemented"
